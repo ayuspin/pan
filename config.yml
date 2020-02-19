@@ -1,0 +1,8 @@
+imports:
+  - path: network.py
+  - path: vm.py
+  - path: config.py
+
+resources:
+- name: config
+  type: config.py
