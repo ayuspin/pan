@@ -1,6 +1,7 @@
 imports:
   - path: network.py
   - path: vm.py
+  - path: srvvm.py
   - path: config.py
 
 resources:

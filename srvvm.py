@@ -9,16 +9,15 @@ def GenerateConfig(context):
           'machineType': ''.join([COMPUTE_URL_BASE, 'projects/', context.env['project'],
                                   '/zones/', context.properties['zone'],
                                   '/machineTypes/', context.properties['machineType']]),
-          'canIpForward': True,
-          'disks': [{
+              'disks': [{
               'deviceName': 'boot',
               'type': 'PERSISTENT',
               'boot': True,
               'autoDelete': True,
               'initializeParams': {
                   'sourceImage': ''.join([COMPUTE_URL_BASE, 'projects/',
-                                          'paloaltonetworksgcp-public','/global/',
-                                          'images/',context.properties['image']])
+                                          'debian-cloud','/global/',
+                                          'images/','family/',context.properties['image']])
               }
           }],
 
@@ -31,20 +30,6 @@ def GenerateConfig(context):
               }],
               'subnetwork': '$(ref.' + context.properties['mgmt-network'] + '-subnetwork.selfLink)',
               'networkIP': context.properties['mgmt-ip'],
-          },
-          {
-              'network': '$(ref.' + context.properties['untrust-network']+ '-network.selfLink)',
-              'accessConfigs': [{
-                  'name': 'UNTRUST Access',
-                  'type': 'ONE_TO_ONE_NAT'
-              }],
-              'subnetwork': '$(ref.' + context.properties['untrust-network'] + '-subnetwork.selfLink)',
-              'networkIP': context.properties['untrust-ip'],
-          },
-          {
-              'network': '$(ref.' + context.properties['trust-network']+ '-network.selfLink)',
-              'subnetwork': '$(ref.' + context.properties['trust-network'] + '-subnetwork.selfLink)',
-              'networkIP': context.properties['trust-ip'],
           }
           ]
       }
